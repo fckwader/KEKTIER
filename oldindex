@@ -1,0 +1,39 @@
+client.on("messageCreate", mesg => {
+  if(mesg.channel.name !== channelName || mesg.author.username === "Waderbot"){
+    return;
+  }
+
+  if(mesg.content.trim().includes(" ")){
+    mesg.reply("Only one word lil bro");
+    setTimeout(() => mesg.delete(), 1000);
+    return;
+  }
+
+  const authorUsername = mesg.author.username;
+  const bannedUsers = JSON.parse(fs.readFileSync("data.json"));
+  if(bannedUsers.includes(authorUsername)){
+    mesg.reply("its not your turn lil bro");
+    setTimeout(() => mesg.delete(), 1000);
+    return;
+  }
+  const next = bannedUsers.shift();
+  bannedUsers.push(authorUsername);
+
+  mesg.channel.messages.fetch({ limit: 100 }).then(messages => {
+    console.log(`Received ${messages.size} messages`);
+
+    messages.forEach(msg => {
+      if(msg.author.username !== "Waderbot"){
+        return;
+      }
+      msg.delete();
+    })
+  });
+
+  if(next){
+    mesg.channel.send(`Next up is **${next}**, or anyone who hasn't sent anything yet.`)
+  }else{
+    mesg.channel.send("Anyone is next!")
+  }
+  fs.writeFileSync("data.json", JSON.stringify(bannedUsers));
+});
