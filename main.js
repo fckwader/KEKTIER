@@ -75,8 +75,7 @@ client.on("messageCreate", mesg => {
     //todo check for silly spins
 })
 
-console.log(IO.getToken())
-client.login("ODkwNzA4MDcwODUyODY2MDU4.Gem-fX.NUUmVBYATH3704lDtwfB34y2aG5NaYhenb-pmI").then(r => {
+client.login(IO.getToken()).then(r => {
     checkInitSpin();
 });
 
