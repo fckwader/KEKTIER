@@ -5,7 +5,6 @@ const {admin} = require("./Admin.js");
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.MESSAGE_CONTENT] });
 
-const token = 'ODkwNzA4MDcwODUyODY2MDU4.Gpnjsn.St7Diz3igdHk0GoI16sj7kYNm3zLOJhhwcSvas';
 const guildID = "1208453500766519326";
 const clientID = "890708070852866058";
 const cId = "1208453500766519326";
@@ -76,7 +75,8 @@ client.on("messageCreate", mesg => {
     //todo check for silly spins
 })
 
-client.login(token).then(r => {
+console.log(IO.getToken())
+client.login("ODkwNzA4MDcwODUyODY2MDU4.Gem-fX.NUUmVBYATH3704lDtwfB34y2aG5NaYhenb-pmI").then(r => {
     checkInitSpin();
 });
 

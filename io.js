@@ -20,7 +20,12 @@ class IO {
         IO.#data[key] = value;
         IO.#write();
     }
+
+    static getToken(){
+        return fs.readFileSync("token", {encoding: "utf-8"});
+    }
 }
+
 
 module.exports.IO = IO;
 
